@@ -65,3 +65,72 @@
       trigger_condition: "ALWAYS"
       timeout: 0
       integration_hash: "5e31833d422f5a298bedc5a1"
+
+---
+- pipeline: "Test, Build and Deploy Sample React Frontend to AWS S3 and CloudFront"
+  trigger_mode: "ON_EVERY_PUSH"
+  ref_name: "develop"
+  ref_type: "BRANCH"
+  trigger_condition: "ALWAYS"
+  actions:
+    - action: "Pretest: Install Dependencies, Remove stale coverage  report and Run Lint tests"
+      type: "BUILD"
+      working_directory: "/buddy/react-boilerplate"
+      docker_image_name: "library/node"
+      docker_image_tag: "10"
+      execute_commands:
+        - "# install recommended npm version for the repo"
+        - "npm run preinstall"
+        - "# Install application dependencies"
+        - "npm install"
+        - "# Prepare application for testing"
+        - "npm run pretest"
+      setup_commands:
+        - "npm install -g gulp grunt-cli"
+      mount_filesystem_path: "/buddy/react-boilerplate"
+      shell: "BASH"
+      trigger_condition: "ALWAYS"
+    - action: "Unit Tests: Run Application Unit tests, Clean test environment"
+      type: "BUILD"
+      working_directory: "/buddy/react-boilerplate"
+      docker_image_name: "library/node"
+      docker_image_tag: "10"
+      execute_commands:
+        - "npm run test"
+        - "npm run test:clean"
+        - ""
+      setup_commands:
+        - "npm install -g gulp grunt-cli"
+      mount_filesystem_path: "/buddy/react-boilerplate"
+      shell: "BASH"
+      trigger_condition: "ALWAYS"
+    - action: "Compile Assets: Minify and Compress for production deployment"
+      type: "BUILD"
+      working_directory: "/buddy/react-boilerplate"
+      docker_image_name: "library/node"
+      docker_image_tag: "10"
+      execute_commands:
+        - "# "
+        - "npm run prebuild"
+        - "npm run build"
+      setup_commands:
+        - "npm install -g gulp grunt-cli"
+      mount_filesystem_path: "/buddy/react-boilerplate"
+      shell: "BASH"
+      trigger_condition: "ALWAYS"
+    - action: "Deploy to AWS S3: Upload files to AWS bucket S3/buddydemo.dominicmotuka.com"
+      type: "AMAZON_S3"
+      input_type: "BUILD_ARTIFACTS"
+      local_path: "build/"
+      bucket_name: "buddydemo.dominicmotuka.com"
+      acl: "PRIVATE"
+      integration_hash: "5e2b5bffaab2cb6d3c21ae3a"
+    - action: "Update Cloudfront: Purge Cloufront Cache for S3 Bucket"
+      type: "CLOUD_FRONT"
+      input_type: "SCM_REPOSITORY"
+      distribution_id: "E3NKJLELSFT7U5"
+      purge_all: true
+      purge_by_change_set_limit: 10
+      trigger_condition: "ALWAYS"
+      timeout: 0
+      integration_hash: "5e31833d422f5a298bedc5a1"
