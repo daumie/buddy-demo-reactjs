@@ -1,4 +1,4 @@
-- pipeline: "Test, Build and Deploy Sample React Frontend to AWS S3 and CloudFront"
+- pipeline: "Production Site: Test, Build and Deploy Sample React Frontend to AWS S3 and CloudFront"
   trigger_mode: "ON_EVERY_PUSH"
   ref_name: "master"
   ref_type: "BRANCH"
@@ -59,15 +59,14 @@
     - action: "Update Cloudfront: Purge Cloufront Cache for S3 Bucket"
       type: "CLOUD_FRONT"
       input_type: "SCM_REPOSITORY"
+      local_path: "/"
       distribution_id: "E3NKJLELSFT7U5"
       purge_all: true
       purge_by_change_set_limit: 10
       trigger_condition: "ALWAYS"
       timeout: 0
       integration_hash: "5e31833d422f5a298bedc5a1"
-
----
-- pipeline: "Test, Build and Deploy Sample React Frontend to AWS S3 and CloudFront"
+- pipeline: "Staging Site: Test, Build and Deploy Sample React Frontend to AWS S3 and CloudFront"
   trigger_mode: "ON_EVERY_PUSH"
   ref_name: "develop"
   ref_type: "BRANCH"
@@ -122,13 +121,13 @@
       type: "AMAZON_S3"
       input_type: "BUILD_ARTIFACTS"
       local_path: "build/"
-      bucket_name: "buddydemo.dominicmotuka.com"
+      bucket_name: "buddydemo-staging.dominicmotuka.com"
       acl: "PRIVATE"
       integration_hash: "5e2b5bffaab2cb6d3c21ae3a"
     - action: "Update Cloudfront: Purge Cloufront Cache for S3 Bucket"
       type: "CLOUD_FRONT"
       input_type: "SCM_REPOSITORY"
-      distribution_id: "E3NKJLELSFT7U5"
+      distribution_id: "E21LMP0XQYN3WE"
       purge_all: true
       purge_by_change_set_limit: 10
       trigger_condition: "ALWAYS"
