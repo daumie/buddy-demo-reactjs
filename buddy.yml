@@ -66,6 +66,35 @@
       trigger_condition: "ALWAYS"
       timeout: 0
       integration_hash: "5e31833d422f5a298bedc5a1"
+    - action: "Send notification to buddy-prod-pipeline channel"
+      type: "SLACK"
+      content: "[#$BUDDY_EXECUTION_ID] $BUDDY_PIPELINE_NAME execution by <$BUDDY_INVOKER_URL|$BUDDY_INVOKER_NAME>"
+      channel: "CT9J1E9FA"
+      channel_name: "buddy-prod-pipeline"
+      attachments:
+        - '{"fallback":"$BUDDY_PIPELINE_NAME execution #$BUDDY_EXECUTION_ID","color":"good","fields":[{"title":"Successful execution","value":"<$BUDDY_EXECUTION_URL|Execution #$BUDDY_EXECUTION_ID $BUDDY_EXECUTION_COMMENT>","short":true},{"title":"Pipeline","value":"<$BUDDY_PIPELINE_URL|$BUDDY_PIPELINE_NAME>","short":true},{"title":"Branch","value":"$BUDDY_EXECUTION_BRANCH","short":true},{"title":"Project","value":"<$BUDDY_PROJECT_URL|$BUDDY_PROJECT_NAME>","short":true}]}'
+      trigger_condition: "ALWAYS"
+      integration_hash: "5e31bdbfaab2cb2649d2636b"
+    - action: "Send notification to buddy-prod-pipeline channel"
+      type: "SLACK"
+      trigger_time: "ON_FAILURE"
+      content: "[#$BUDDY_EXECUTION_ID] $BUDDY_PIPELINE_NAME execution by <$BUDDY_INVOKER_URL|$BUDDY_INVOKER_NAME>"
+      channel: "CT9J1E9FA"
+      channel_name: "buddy-prod-pipeline"
+      attachments:
+        - '{"fallback":"$BUDDY_PIPELINE_NAME execution #$BUDDY_EXECUTION_ID","color":"danger","fields":[{"title":"Failed execution","value":"<$BUDDY_EXECUTION_URL|Execution #$BUDDY_EXECUTION_ID $BUDDY_EXECUTION_COMMENT>","short":true},{"title":"Pipeline","value":"<$BUDDY_PIPELINE_URL|$BUDDY_PIPELINE_NAME>","short":true},{"title":"Branch","value":"$BUDDY_EXECUTION_BRANCH","short":true},{"title":"Project","value":"<$BUDDY_PROJECT_URL|$BUDDY_PROJECT_NAME>","short":true}]}'
+      trigger_condition: "ALWAYS"
+      integration_hash: "5e31bdbfaab2cb2649d2636b"
+    - action: "Send notification to buddy-prod-pipeline channel"
+      type: "SLACK"
+      trigger_time: "ON_BACK_TO_SUCCESS"
+      content: "[#$BUDDY_EXECUTION_ID] $BUDDY_PIPELINE_NAME execution by <$BUDDY_INVOKER_URL|$BUDDY_INVOKER_NAME>"
+      channel: "CT9J1E9FA"
+      channel_name: "buddy-prod-pipeline"
+      attachments:
+        - '{"fallback":"$BUDDY_PIPELINE_NAME execution #$BUDDY_EXECUTION_ID","color":"good","fields":[{"title":"Successful execution","value":"<$BUDDY_EXECUTION_URL|Execution #$BUDDY_EXECUTION_ID $BUDDY_EXECUTION_COMMENT>","short":true},{"title":"Pipeline","value":"<$BUDDY_PIPELINE_URL|$BUDDY_PIPELINE_NAME>","short":true},{"title":"Branch","value":"$BUDDY_EXECUTION_BRANCH","short":true},{"title":"Project","value":"<$BUDDY_PROJECT_URL|$BUDDY_PROJECT_NAME>","short":true}]}'
+      trigger_condition: "ALWAYS"
+      integration_hash: "5e31bdbfaab2cb2649d2636b"
 - pipeline: "Staging Site: Test, Build and Deploy Sample React Frontend to AWS S3 and CloudFront"
   trigger_mode: "ON_EVERY_PUSH"
   ref_name: "develop"
@@ -133,3 +162,32 @@
       trigger_condition: "ALWAYS"
       timeout: 0
       integration_hash: "5e31833d422f5a298bedc5a1"
+    - action: "Send notification to buddy-staging-pipeline channel"
+      type: "SLACK"
+      content: "[#$BUDDY_EXECUTION_ID] $BUDDY_PIPELINE_NAME execution by <$BUDDY_INVOKER_URL|$BUDDY_INVOKER_NAME>"
+      channel: "CT94RGV8C"
+      channel_name: "buddy-staging-pipeline"
+      attachments:
+        - '{"fallback":"$BUDDY_PIPELINE_NAME execution #$BUDDY_EXECUTION_ID","color":"good","fields":[{"title":"Successful execution","value":"<$BUDDY_EXECUTION_URL|Execution #$BUDDY_EXECUTION_ID $BUDDY_EXECUTION_COMMENT>","short":true},{"title":"Pipeline","value":"<$BUDDY_PIPELINE_URL|$BUDDY_PIPELINE_NAME>","short":true},{"title":"Branch","value":"$BUDDY_EXECUTION_BRANCH","short":true},{"title":"Project","value":"<$BUDDY_PROJECT_URL|$BUDDY_PROJECT_NAME>","short":true}]}'
+      trigger_condition: "ALWAYS"
+      integration_hash: "5e31bdbfaab2cb2649d2636b"
+    - action: "Send notification to buddy-prod-pipeline channel"
+      type: "SLACK"
+      trigger_time: "ON_FAILURE"
+      content: "[#$BUDDY_EXECUTION_ID] $BUDDY_PIPELINE_NAME execution by <$BUDDY_INVOKER_URL|$BUDDY_INVOKER_NAME>"
+      channel: "CT94RGV8C"
+      channel_name: "buddy-staging-pipeline"
+      attachments:
+        - '{"fallback":"$BUDDY_PIPELINE_NAME execution #$BUDDY_EXECUTION_ID","color":"danger","fields":[{"title":"Failed execution","value":"<$BUDDY_EXECUTION_URL|Execution #$BUDDY_EXECUTION_ID $BUDDY_EXECUTION_COMMENT>","short":true},{"title":"Pipeline","value":"<$BUDDY_PIPELINE_URL|$BUDDY_PIPELINE_NAME>","short":true},{"title":"Branch","value":"$BUDDY_EXECUTION_BRANCH","short":true},{"title":"Project","value":"<$BUDDY_PROJECT_URL|$BUDDY_PROJECT_NAME>","short":true}]}'
+      trigger_condition: "ALWAYS"
+      integration_hash: "5e31bdbfaab2cb2649d2636b"
+    - action: "Send notification to buddy-staging-pipeline channel"
+      type: "SLACK"
+      trigger_time: "ON_BACK_TO_SUCCESS"
+      content: "[#$BUDDY_EXECUTION_ID] $BUDDY_PIPELINE_NAME execution by <$BUDDY_INVOKER_URL|$BUDDY_INVOKER_NAME>"
+      channel: "CT94RGV8C"
+      channel_name: "buddy-staging-pipeline"
+      attachments:
+        - '{"fallback":"$BUDDY_PIPELINE_NAME execution #$BUDDY_EXECUTION_ID","color":"good","fields":[{"title":"Successful execution","value":"<$BUDDY_EXECUTION_URL|Execution #$BUDDY_EXECUTION_ID $BUDDY_EXECUTION_COMMENT>","short":true},{"title":"Pipeline","value":"<$BUDDY_PIPELINE_URL|$BUDDY_PIPELINE_NAME>","short":true},{"title":"Branch","value":"$BUDDY_EXECUTION_BRANCH","short":true},{"title":"Project","value":"<$BUDDY_PROJECT_URL|$BUDDY_PROJECT_NAME>","short":true}]}'
+      trigger_condition: "ALWAYS"
+      integration_hash: "5e31bdbfaab2cb2649d2636b"
